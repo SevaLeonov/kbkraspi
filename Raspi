@@ -8,7 +8,7 @@ bot = telebot.TeleBot("6613694276:AAEWBo_Va7b929i3TJm4kECM2HVxl-DDBRY")
 schedule = pd.read_excel("https://docs.google.com/spreadsheets/d/10qauPwaMBwfLv9bzi13AxoHflszhexTK/edit?usp=sharing&ouid=113059829517749461289&rtpof=true&sd=true")
 
 # Функция для обработки входящих сообщений
-@bot.message_handler(commands=["расписание"])
+@bot.message_handler(commands=["raspi"])
 def get_schedule(message):
     # Получаем номер группы из сообщения
     group_number = message.text.split(" ")[1]
