@@ -2,10 +2,10 @@ import telebot
 import pandas as pd
 
 # Инициализируем бота
-bot = telebot.TeleBot("YOUR_BOT_TOKEN")
+bot = telebot.TeleBot("6613694276:AAEWBo_Va7b929i3TJm4kECM2HVxl-DDBRY")
 
 # Загружаем расписание занятий из Excel-файла
-schedule = pd.read_excel("schedule.xlsx")
+schedule = pd.read_excel("https://docs.google.com/spreadsheets/d/10qauPwaMBwfLv9bzi13AxoHflszhexTK/edit?usp=sharing&ouid=113059829517749461289&rtpof=true&sd=true")
 
 # Функция для обработки входящих сообщений
 @bot.message_handler(commands=["расписание"])
