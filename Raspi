@@ -1,0 +1,32 @@
+import telebot
+import pandas as pd
+
+# Инициализируем бота
+bot = telebot.TeleBot("YOUR_BOT_TOKEN")
+
+# Загружаем расписание занятий из Excel-файла
+schedule = pd.read_excel("schedule.xlsx")
+
+# Функция для обработки входящих сообщений
+@bot.message_handler(commands=["расписание"])
+def get_schedule(message):
+    # Получаем номер группы из сообщения
+    group_number = message.text.split(" ")[1]
+
+    # Ищем расписание для указанной группы
+    schedule_for_group = schedule[schedule["Группа"] == group_number]
+
+    # Формируем ответ
+    response = "Расписание занятий для группы {}:\n\n".format(group_number)
+    for day in schedule_for_group["День"].unique():
+        response += "{}:\n".format(day)
+        for lesson in schedule_for_group[schedule_for_group["День"] == day].to_dict("records"):
+            response += "    * {} ({}-{})\n".format(
+                lesson["Предмет"], lesson["Аудитория"], lesson["Преподаватель"]
+            )
+
+    # Отправляем ответ пользователю
+    bot.send_message(message.chat.id, response)
+
+# Запускаем бота
+bot.polling()
